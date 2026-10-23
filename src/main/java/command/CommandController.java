@@ -2,11 +2,11 @@ package command;
 
 import java.util.ArrayDeque;
 
-public class CommandControler {
+public class CommandController {
     ArrayDeque<Command> undo;
     ArrayDeque<Command> redo;
 
-    public CommandControler() {
+    public CommandController() {
         undo = new ArrayDeque<>();
         redo = new ArrayDeque<>();
     }
