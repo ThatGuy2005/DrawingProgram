@@ -18,8 +18,9 @@ public class Circle extends Shape{
     @Override
     public void draw(Graphics2D g) {
         g.setColor(color);
-        g.drawOval(center.getX(), center.getY(),
-                radius, radius);
+        g.drawOval(center.getX() - radius,
+                center.getY() - radius,
+                2 * radius, 2 * radius);
     }
     @Override
     public boolean contains(Point p) {

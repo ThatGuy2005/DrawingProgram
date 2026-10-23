@@ -11,9 +11,10 @@ public class ShapeFactory {
             case CIRCLE: return new Circle(a,
                     (int) Math.round(Math.hypot(b.getX() - a.getX(),
                             b.getY() - a.getY())));
-            case RECTANGLE: return new Rectangle(a,
-                    Math.abs(b.getX()- a.getX()),
-                    Math.abs(b.getY()- a.getY()));
+            case RECTANGLE: return new Rectangle(
+                    new Point(Math.min(a.getX(), b.getX()), Math.min(a.getY(), b.getY())),
+                    Math.abs(b.getX() - a.getX()),
+                    Math.abs(b.getY() - a.getY()));
             case TRIANGLE: {
                 int left   = Math.min(a.getX(), b.getX());
                 int right  = Math.max(a.getX(), b.getX());

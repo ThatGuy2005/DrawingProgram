@@ -64,7 +64,7 @@ public class Rectangle extends Shape {
     @Override
     public boolean contains(Point point) {
         // Check the opposite corners
-        return(point.getX() < points.getFirst().getX()
+        return !(point.getX() < points.getFirst().getX()
                 || point.getY() < points.getFirst().getY()
                 || point.getX() > points.get(2).getX()
                 || point.getY() > points.get(2).getY());

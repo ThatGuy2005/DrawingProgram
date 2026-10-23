@@ -25,7 +25,7 @@ public class DrawPanel extends JPanel {
 
     private Tool selectedTool = Tool.LINE;
 
-    private Color selectedColor = Color.RED;
+    private Color selectedColor = Color.BLACK   ;
 
     public void undo() {
         controller.undo();

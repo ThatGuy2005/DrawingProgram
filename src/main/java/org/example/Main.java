@@ -8,6 +8,6 @@ import javax.swing.*;
 public class Main {
     static void main() {
         DrawFrame myApp = new DrawFrame();
-        myApp.show();
+        myApp.setVisible(true);
     }
 }
