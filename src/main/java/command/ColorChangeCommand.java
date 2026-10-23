@@ -1,7 +1,9 @@
 package command;
 
-import org.example.Color;
+
 import shapes.Shape;
+
+import java.awt.*;
 
 public class ColorChangeCommand implements Command {
     private final Shape shape;

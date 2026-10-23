@@ -17,6 +17,7 @@ public class Circle extends Shape{
 
     @Override
     public void draw(Graphics2D g) {
+        g.setColor(color);
         g.drawOval(center.getX(), center.getY(),
                 radius, radius);
     }

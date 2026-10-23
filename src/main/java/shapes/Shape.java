@@ -1,7 +1,5 @@
 package shapes;
 
-import org.example.Color;
-
 import java.awt.*;
 
 public abstract class Shape {
@@ -11,4 +9,5 @@ public abstract class Shape {
     abstract public boolean contains(Point p);
     abstract public void move(int dx, int dy);
     public void setColor(Color color) { this.color = color;}
+    public Color getColor() {return this.color;}
 }

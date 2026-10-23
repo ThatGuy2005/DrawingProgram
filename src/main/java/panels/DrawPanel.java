@@ -24,6 +24,20 @@ public class DrawPanel extends JPanel {
 
     private Tool selectedTool = Tool.LINE;
 
+    private Color selectedColor = Color.RED;
+
+    public void undo() {
+        controller.undo();
+    }
+
+    public void redo() {
+        controller.redo();
+    }
+
+    public void setColor(Color color) {
+        this.selectedColor = color;
+    }
+
     public void setTool(Tool tool) {
         this.selectedTool = tool;
     }
@@ -39,6 +53,7 @@ public class DrawPanel extends JPanel {
             public void mouseDragged(MouseEvent e) {
                 try {
                     preview = ShapeFactory.create(selectedTool, start, new Point(e.getX(), e.getY()));
+                    preview.setColor(selectedColor);
                 } catch (IllegalArgumentException ex) {
                     preview = null;
                 }
@@ -50,6 +65,7 @@ public class DrawPanel extends JPanel {
                 preview = null;
                 try {
                     Shape finished = ShapeFactory.create(selectedTool, start, new Point(e.getX(), e.getY()));
+                    finished.setColor(selectedColor);
                     controller.executeCommand(new AddCommand(shapes, finished));
                 } catch (IllegalArgumentException ex) {
 

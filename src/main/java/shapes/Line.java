@@ -14,6 +14,7 @@ public class Line extends Shape{
 
     @Override
     public void draw(Graphics2D g) {
+        g.setColor(color);
         g.drawLine(point1.getX(), point1.getY(),
                 point2.getX(), point2.getY());
     }

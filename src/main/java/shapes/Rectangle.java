@@ -53,6 +53,7 @@ public class Rectangle extends Shape {
 
     @Override
     public void draw(Graphics2D graphics2D) {
+        graphics2D.setColor(color);
         graphics2D.draw(new java.awt.Rectangle(points.getFirst().getX(),
                                              points.getFirst().getY(),
                         points.get(2).getX()-points.getFirst().getX(),

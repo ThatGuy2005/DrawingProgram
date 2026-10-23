@@ -16,6 +16,7 @@ public class Triangle extends Shape {
     }
     @Override
     public void draw(Graphics2D g) {
+        g.setColor(color);
         int[] xs = new int[3];
         int[] ys = new int[3];
         for (int i = 0; i < 3; i++) {
