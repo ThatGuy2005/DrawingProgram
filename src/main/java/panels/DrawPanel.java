@@ -22,7 +22,11 @@ public class DrawPanel extends JPanel {
     private Point start;
     private Shape preview;
 
-    private Tool selectedTool;
+    private Tool selectedTool = Tool.LINE;
+
+    public void setTool(Tool tool) {
+        this.selectedTool = tool;
+    }
 
     public DrawPanel() {
         MouseAdapter mouse = new MouseAdapter() {
@@ -33,15 +37,23 @@ public class DrawPanel extends JPanel {
 
             @Override
             public void mouseDragged(MouseEvent e) {
-                preview = ShapeFactory.create(selectedTool,start, new Point(e.getX(), e.getY()));
+                try {
+                    preview = ShapeFactory.create(selectedTool, start, new Point(e.getX(), e.getY()));
+                } catch (IllegalArgumentException ex) {
+                    preview = null;
+                }
                 repaint();
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                Shape finished = ShapeFactory.create(selectedTool,start, new Point(e.getX(), e.getY()));
                 preview = null;
-                controller.executeCommand(new AddCommand(shapes, finished));
+                try {
+                    Shape finished = ShapeFactory.create(selectedTool, start, new Point(e.getX(), e.getY()));
+                    controller.executeCommand(new AddCommand(shapes, finished));
+                } catch (IllegalArgumentException ex) {
+
+                }
                 repaint();
             }
         };
@@ -54,12 +66,12 @@ public class DrawPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g2.setColor(Color.RED);
-        g2.drawRect(50, 50, 100, 60);     // x, y, width, height
-        g2.fillOval(200, 80, 40, 40);
-        g2.drawLine(10, 10, 300, 200);
+        for (Shape s : shapes)
+            s.draw(g2);
+
+        if (preview != null)
+            preview.draw(g2);
     }
-
-
 }
