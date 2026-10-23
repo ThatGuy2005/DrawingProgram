@@ -40,7 +40,7 @@ public class DrawFrame extends JFrame {
             group.add(button);
             toolBar.add(button);
 
-            if (tool == Tool.RECTANGLE)        // matches the panel's default tool
+            if (tool == Tool.LINE)        // matches the panel's default tool
                 button.setSelected(true);
         }
 

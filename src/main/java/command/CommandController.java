@@ -29,7 +29,7 @@ public class CommandController {
         if(!redo.isEmpty()) {
             Command cmd = redo.pop();
             cmd.execute();
-            redo.push(cmd);
+            undo.push(cmd);
         }
     }
 }

@@ -4,6 +4,7 @@ import command.AddCommand;
 import command.CommandController;
 import factories.ShapeFactory;
 import factories.Tool;
+import model.Draw;
 import shapes.Point;
 import shapes.Shape;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DrawPanel extends JPanel {
-    private final List<Shape> shapes = new ArrayList<>();
+    private final Draw shapes = new Draw();
     private final CommandController controller = new CommandController();
 
     private Point start;
@@ -28,10 +29,12 @@ public class DrawPanel extends JPanel {
 
     public void undo() {
         controller.undo();
+        repaint();
     }
 
     public void redo() {
         controller.redo();
+        repaint();
     }
 
     public void setColor(Color color) {
@@ -84,7 +87,7 @@ public class DrawPanel extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        for (Shape s : shapes)
+        for (Shape s : shapes.getShapes())
             s.draw(g2);
 
         if (preview != null)
