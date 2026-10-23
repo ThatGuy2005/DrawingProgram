@@ -52,7 +52,7 @@ public class Rectangle extends Shape {
     }
 
     @Override
-    public public void draw(Graphics2D graphics2D) {
+    public void draw(Graphics2D graphics2D) {
         graphics2D.draw(new java.awt.Rectangle(points.getFirst().getX(),
                                              points.getFirst().getY(),
                         points.get(2).getX()-points.getFirst().getX(),
