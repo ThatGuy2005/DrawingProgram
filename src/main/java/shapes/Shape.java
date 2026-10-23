@@ -7,7 +7,7 @@ import java.awt.*;
 public abstract class Shape {
     Color color;
     double lineThickness;
-    abstract void draw(Graphics2D g);
-    abstract boolean contains(Point p);
-    abstract void move(int dx, int dy);
+    abstract public void draw(Graphics2D g);
+    abstract public boolean contains(Point p);
+    abstract public void move(int dx, int dy);
 }

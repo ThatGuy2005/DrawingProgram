@@ -16,18 +16,18 @@ public class Circle extends Shape{
     }
 
     @Override
-    void draw(Graphics2D g) {
+    public void draw(Graphics2D g) {
         g.drawOval(center.getX(), center.getY(),
                 radius, radius);
     }
     @Override
-    boolean contains(Point p) {
+    public boolean contains(Point p) {
         double dx = p.getX() - center.getX();
         double dy = p.getY() - center.getY();
         return dx * dx + dy * dy <= radius * radius;
     }
     @Override
-    void move(int dx, int dy) {
+    public void move(int dx, int dy) {
         center.setX(center.getX() + dx);
         center.setY(center.getY() + dy);
     }

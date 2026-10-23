@@ -52,7 +52,7 @@ public class Rectangle extends Shape {
     }
 
     @Override
-    public void draw(Graphics2D graphics2D) {
+    public public void draw(Graphics2D graphics2D) {
         graphics2D.draw(new java.awt.Rectangle(points.getFirst().getX(),
                                              points.getFirst().getY(),
                         points.get(2).getX()-points.getFirst().getX(),
@@ -61,7 +61,7 @@ public class Rectangle extends Shape {
     };
 
     @Override
-    boolean contains(Point point) {
+    public boolean contains(Point point) {
         // Check the opposite corners
         return(point.getX() < points.getFirst().getX()
                 || point.getY() < points.getFirst().getY()
@@ -70,7 +70,7 @@ public class Rectangle extends Shape {
     }
 
     @Override
-    void move(int dx, int dy) {
+    public void move(int dx, int dy) {
         for(Point point : points) {
             point.setX(point.getX() + dx);
             point.setY(point.getY() + dy);

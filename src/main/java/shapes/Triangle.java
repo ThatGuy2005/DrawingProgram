@@ -15,7 +15,7 @@ public class Triangle extends Shape {
         this.points = List.copyOf(points);
     }
     @Override
-    void draw(Graphics2D g) {
+    public void draw(Graphics2D g) {
         int[] xs = new int[3];
         int[] ys = new int[3];
         for (int i = 0; i < 3; i++) {
@@ -25,7 +25,7 @@ public class Triangle extends Shape {
         g.drawPolygon(xs, ys, 3);
     }
     @Override
-    boolean contains(Point p) {
+    public boolean contains(Point p) {
         Point a = points.get(0), b = points.get(1), c = points.get(2);
 
         long d1 = side(a, b, p);
@@ -43,7 +43,7 @@ public class Triangle extends Shape {
     }
 
     @Override
-    void move(int dx, int dy) {
+    public void move(int dx, int dy) {
         for (Point point : points) {
             point.setX(point.getX() + dx);
             point.setY(point.getY() + dy);

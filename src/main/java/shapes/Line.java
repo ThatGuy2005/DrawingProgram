@@ -13,12 +13,12 @@ public class Line extends Shape{
     }
 
     @Override
-    void draw(Graphics2D g) {
+    public void draw(Graphics2D g) {
         g.drawLine(point1.getX(), point1.getY(),
                 point2.getX(), point2.getY());
     }
     @Override
-    boolean contains(Point point) {
+    public boolean contains(Point point) {
         double dist = Line2D.ptSegDist(
                 point1.getX(), point1.getY(),
                 point2.getX(), point2.getY(),
@@ -26,7 +26,7 @@ public class Line extends Shape{
         return dist <= 4;
     }
     @Override
-    void move(int dx, int dy) {
+    public void move(int dx, int dy) {
         point1.setX(point1.getX() + dx);
         point1.setY(point1.getY() + dy);
         point2.setX(point2.getX() + dx);
