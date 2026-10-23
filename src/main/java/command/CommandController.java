@@ -32,4 +32,13 @@ public class CommandController {
             undo.push(cmd);
         }
     }
+
+    public boolean canUndo() {
+        return !undo.isEmpty();
+    }
+
+    public boolean canRedo() {
+        return !redo.isEmpty();
+    }
+
 }
