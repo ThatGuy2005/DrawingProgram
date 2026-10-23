@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.List;
 
 public class Triangle extends Shape {
-    private List<Point> points;
+    private final List<Point> points;
     public Triangle(List<Point> points) {
         if (points == null || points.size() != 3)
             throw new IllegalArgumentException("A triangle must have three points!");
