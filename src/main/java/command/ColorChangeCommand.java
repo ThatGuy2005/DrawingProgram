@@ -8,7 +8,7 @@ import java.awt.*;
 public class ColorChangeCommand implements Command {
     private final Shape shape;
     private final Color color;
-    private final Color oldColor;
+    private Color oldColor;
 
     public ColorChangeCommand(Shape shape, Color color) {
         this.shape = shape;
@@ -16,7 +16,10 @@ public class ColorChangeCommand implements Command {
         this.oldColor = color;
     }
     @Override
-    public void execute() { shape.setColor(color); }
+    public void execute() {
+        this.oldColor = shape.getColor();
+        shape.setColor(color);
+    }
 
     @Override
     public void undo() { shape.setColor(oldColor); }
