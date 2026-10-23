@@ -4,5 +4,6 @@ public enum Tool {
     RECTANGLE,
     LINE,
     CIRCLE,
-    TRIANGLE
+    TRIANGLE,
+    SELECT
 }

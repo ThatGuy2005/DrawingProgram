@@ -2,6 +2,7 @@ package panels;
 
 import command.AddCommand;
 import command.CommandController;
+import command.MoveCommand;
 import factories.ShapeFactory;
 import factories.Tool;
 import model.Draw;
@@ -22,6 +23,10 @@ public class DrawPanel extends JPanel {
 
     private Point start;
     private Shape preview;
+
+    private Shape selected;
+    private Point lastPoint;
+    private int totalDx, totalDy;
 
     private Tool selectedTool = Tool.LINE;
 
@@ -49,11 +54,32 @@ public class DrawPanel extends JPanel {
         MouseAdapter mouse = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                start = new Point(e.getX(), e.getY());
+                Point p = new Point(e.getX(), e.getY());
+
+                if (selectedTool == Tool.SELECT) {
+                    selected = findShapeAt(p);
+                    lastPoint = p;
+                    totalDx = 0;
+                    totalDy = 0;
+                    return;
+                }
+
+                start = p;
             }
 
             @Override
             public void mouseDragged(MouseEvent e) {
+                if (selectedTool == Tool.SELECT) {
+                    if (selected == null) return;
+                    int dx = e.getX() - lastPoint.getX();
+                    int dy = e.getY() - lastPoint.getY();
+                    selected.move(dx, dy);          // live feedback while dragging
+                    totalDx += dx;
+                    totalDy += dy;
+                    lastPoint = new Point(e.getX(), e.getY());
+                    repaint();
+                    return;
+                }
                 try {
                     preview = ShapeFactory.create(selectedTool, start, new Point(e.getX(), e.getY()));
                     preview.setColor(selectedColor);
@@ -65,6 +91,15 @@ public class DrawPanel extends JPanel {
 
             @Override
             public void mouseReleased(MouseEvent e) {
+                if (selectedTool == Tool.SELECT) {
+                    if (selected != null && (totalDx != 0 || totalDy != 0)) {
+                        selected.move(-totalDx, -totalDy);   // put it back...
+                        controller.executeCommand(new MoveCommand(selected, totalDx, totalDy)); // ...and move it as one undoable step
+                    }
+                    selected = null;
+                    repaint();
+                    return;
+                }
                 preview = null;
                 try {
                     Shape finished = ShapeFactory.create(selectedTool, start, new Point(e.getX(), e.getY()));
@@ -79,6 +114,14 @@ public class DrawPanel extends JPanel {
 
         addMouseListener(mouse);         // pressed, released, clicked
         addMouseMotionListener(mouse);   // dragged, moved
+    }
+
+    private Shape findShapeAt(Point p) {
+        List<Shape> list = shapes.getShapes();
+        for (int i = list.size() - 1; i >= 0; i--)
+            if (list.get(i).contains(p))
+                return list.get(i);
+        return null;
     }
 
     @Override
