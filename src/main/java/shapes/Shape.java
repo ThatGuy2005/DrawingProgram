@@ -10,4 +10,5 @@ public abstract class Shape {
     abstract public void draw(Graphics2D g);
     abstract public boolean contains(Point p);
     abstract public void move(int dx, int dy);
+    public void setColor(Color color) { this.color = color;}
 }
